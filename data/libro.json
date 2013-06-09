@@ -1,9 +1,9 @@
 {
 	"model" : {
-		"isbn" : "uno",
-		"titulo" : 123,
-		"autor" : "",
-		"precioReferencia" : "5.000"
+		"isbn" : 9789568410575,
+		"titulo" : "Steve Jobs, La Biografía Exclusiva Del Fundador De Apple",
+		"autor" : "Walter Isaacson",
+		"precioReferencia" : "19.000"
 	},
 	"success" : "true"
 }

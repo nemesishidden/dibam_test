@@ -68,6 +68,9 @@ var app = {
                     window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
                 }
                 */
+                //document.getElementById("texto").innerHTML = args.text;
+                document.getElementById("formato").innerHTML = args.format;
+                this.buscarLibro(args.format);
                 // document.getElementById("texto").innerHTML = args.text;
                 // document.getElementById("formato").innerHTML = args.format;
                 // document.getElementById("cancelled").innerHTML = args.cancelled;
@@ -83,7 +86,7 @@ var app = {
 
     logear: function(){
         console.log('logear');
-         $.ajax({
+        $.ajax({
             url: 'data/usuario.json',
             type: 'GET',
             dataType: 'json',
@@ -108,6 +111,29 @@ var app = {
 
     capturarFoto: function(){
 
+    },
+
+    buscarLibro: function(codigoIsbn){
+        $.ajax({
+            url: 'data/libro.json',
+            type: 'POST',
+            dataType: 'json',
+            error : function (){ document.title='error'; }, 
+            success: function (data) {
+                if(data.success){
+
+
+                    document.getElementById("isbn").value = codigoIsbn;
+                    document.getElementById("titulo").value = data.model.titulo;
+                    document.getElementById("autor").value = data.model.autor;
+                    document.getElementById("precioReferencia").value = data.model.precioReferencia;
+                }
+                console.log(data.model.usuario);
+                console.log(data.model.pass);
+                console.log(data.success);
+                
+            }
+        });
     }
 
 };
