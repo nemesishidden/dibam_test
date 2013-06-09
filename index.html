@@ -61,23 +61,23 @@
             </div>
 
             <div data-role="page" id="inicio">
-                <div data-role="header" >
+                <div data-role="header" data-position="fixed">
                     <h1>DIBAM</h1>
                 </div>
                 <div data-role="content">   
                     <ul data-role="listview">
                         <li><a href=""><img src="img/icons/nuevaSolicitud.png" alt="Buy"><p class="ui-li-desc-menu">Nueva Solicitud</p></a>
-                            <ul data-role="listview">
-                                <li><a href="">Escanerar Libro</a></li>
-                                <li><a href="" id="newSolicitud">Ingresar Manualmente</a></li>
+                            <ul data-role="listview" data-inset="true">
+                                <li><a href="" id="scan"><img src="img/icons/escanerLibro.png"><p class="ui-li-desc-menu">Escanerar Libro</p></a></li>
+                                <li><a href="" id="newSolicitud"><img src="img/icons/ingresoManual.png"><p class="ui-li-desc-menu">Ingresar Manualmente</p></a></li>
                             </ul>
                         </li>
-                        <li><a href="#page3"><img src="img/icons/solPorEnviar.png" alt="Buy" ><p class="ui-li-desc-menu">Solicitud por enviar</p></a></li>
-                        <li><a href="#page4"><img src="img/icons/solEnviadas.png" alt="Buy" ><p class="ui-li-desc-menu">Solicitudes enviadas</p></a></li>
-                        <li><a href="#page5"><img src="img/icons/misPresupuestos.png" alt="Buy"><p class="ui-li-desc-menu">Mis presupuestos</p></a></li>
+                        <li><a href="#page3"><img src="img/icons/solPorEnviar.png"><p class="ui-li-desc-menu">Solicitud por enviar</p></a></li>
+                        <li><a href="#page4"><img src="img/icons/solEnviadas.png"><p class="ui-li-desc-menu">Solicitudes enviadas</p></a></li>
+                        <li><a href="#page5"><img src="img/icons/misPresupuestos.png"><p class="ui-li-desc-menu">Mis presupuestos</p></a></li>
                     </ul>       
                 </div>
-                <div data-role="footer" >
+                <div data-role="footer" data-position="fixed">
                     <div data-role="navbar" data-iconpos="top">
                         <ul>
                             <li><a href="#logout" data-icon="back">Salir</a></li>
@@ -89,7 +89,7 @@
             </div>
 
             <div data-role="page" id="newSolicitudPag">
-                <div data-role="header" data-id="header">
+                <div data-role="header" data-id="header" data-position="fixed">
                     <h1>Nueva Solicitud</h1>
                 </div>
                 <div data-role="content">   
@@ -117,7 +117,7 @@
                         
                         <div data-role="navbar" data-iconpos="top">
                             <ul>
-                                <li><a href="" data-icon="plus"id="scan">Agregar Foto</a></li>
+                                <li><a href="" data-icon="plus"id="capturar">Agregar Foto</a></li>
                                 <li><a href="" data-icon="check">Guardar</a></li>
                                 <li><a href="" data-icon="gear">Camara</a></li>
                             </ul>
@@ -125,7 +125,7 @@
                     </form>
                     
                 </div>
-                <div data-role="footer" data-id="foo1" >
+                <div data-role="footer" data-id="foo1" data-position="fixed">
                     <div data-role="navbar" data-iconpos="top">
                         <ul>
                             <li><a href="#inicio" data-icon="back">Volver</a></li>
@@ -137,37 +137,37 @@
             </div>
 
             <div data-role="page" id="page3">
-                <div data-role="header">
+                <div data-role="header" data-position="fixed">
                     <h1>Solicitud por enviar</h1>
                 </div>
                 <div data-role="content">   
                     Content     
                 </div>
-                <div data-role="footer">
+                <div data-role="footer" data-position="fixed">
                     <h4>Page Footer</h4>
                 </div>
             </div>
 
             <div data-role="page" id="page4">
-                <div data-role="header">
+                <div data-role="header" data-position="fixed">
                     <h1>Solicitudes enviadas</h1>
                 </div>
                 <div data-role="content">   
                     Content     
                 </div>
-                <div data-role="footer">
+                <div data-role="footer" data-position="fixed">
                     <h4>Page Footer</h4>
                 </div>
             </div>
 
             <div data-role="page" id="page5">
-                <div data-role="header">
+                <div data-role="header" data-position="fixed">
                     <h1>Mis presupuestos</h1>
                 </div>
                 <div data-role="content">   
                     Content     
                 </div>
-                <div data-role="footer">
+                <div data-role="footer" data-position="fixed">
                     <h4>Page Footer</h4>
                 </div>
             </div>

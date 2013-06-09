@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var pictureSource;   // Origen de la imagen
+var destinationType; // Formato del valor retornado
 var app = {
     // Application Constructor
     initialize: function() {
@@ -30,7 +32,7 @@ var app = {
         document.getElementById('logear').addEventListener('click', this.logear, false);
         
         document.getElementById('scan').addEventListener('click', this.scan, false);
-        
+
         document.getElementById('newSolicitud').addEventListener('click', this.cambioPagina, false);
     },
     // deviceready Event Handler
@@ -38,6 +40,8 @@ var app = {
     // The scope of `this` is the event. In order to call the `receivedEvent`
     // function, we must explicity call `app.receivedEvent(...);`
     onDeviceReady: function() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
@@ -64,12 +68,14 @@ var app = {
                     window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
                 }
                 */
-                document.getElementById("texto").innerHTML = args.text;
-                document.getElementById("formato").innerHTML = args.format;
-                document.getElementById("cancelled").innerHTML = args.cancelled;
-                document.getElementById("args").innerHTML = args;
+                // document.getElementById("texto").innerHTML = args.text;
+                // document.getElementById("formato").innerHTML = args.format;
+                // document.getElementById("cancelled").innerHTML = args.cancelled;
+                // document.getElementById("args").innerHTML = args;
+
                 console.log(args);
-        });
+                this.cambioPagina
+            });
         } catch (ex) {
             console.log(ex.message);
         }
@@ -98,6 +104,10 @@ var app = {
         var pag = '#'+this.id+'Pag';
         $.mobile.changePage( pag, { transition: "slide"} );
         console.log('this.cambioPagina');
+    },
+
+    capturarFoto: function(){
+
     }
 
 };
