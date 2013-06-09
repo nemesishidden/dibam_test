@@ -1,0 +1,9 @@
+{
+	"model" : {
+		"isbn" : "uno",
+		"titulo" : 123,
+		"autor" : "",
+		"precioReferencia" : "5.000"
+	},
+	"success" : "true"
+}
