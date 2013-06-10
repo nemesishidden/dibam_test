@@ -80,7 +80,7 @@ var app = {
                 // document.getElementById("formato").innerHTML = args.format;
                 // document.getElementById("cancelled").innerHTML = args.cancelled;
                 // document.getElementById("args").innerHTML = args;
-                $.mobile.changePage( 'newSolicitudPag', { transition: "slide"} );
+                $.mobile.changePage( '#newSolicitudPag', { transition: "slide"} );
                 console.log(args);
             });
         } catch (ex) {
@@ -143,6 +143,8 @@ var app = {
 
     guardarLibro: function(){
         console.log('guardarLibro');
+        var pag = '#inicio';
+        $.mobile.changePage( pag, { transition: "slide"} );
     },
 
     // Rellena la base de datos 
