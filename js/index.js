@@ -75,7 +75,7 @@ var app = {
                 //document.getElementById("texto").innerHTML = args.text;
                 // document.getElementById("formato").innerHTML = args.format;
                 app.buscarLibro(args.text);
-                document.getElementById("isbn").value = codigoIsbn;
+                document.getElementById("isbn").value = args.text;
                 // document.getElementById("texto").innerHTML = args.text;
                 // document.getElementById("formato").innerHTML = args.format;
                 // document.getElementById("cancelled").innerHTML = args.cancelled;
