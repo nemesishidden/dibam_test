@@ -57,7 +57,7 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        console.log('Evento Recivido: ' + id);
     },
     scan: function() {
         console.log('scanning');
@@ -73,13 +73,14 @@ var app = {
                 }
                 */
                 //document.getElementById("texto").innerHTML = args.text;
-                document.getElementById("formato").innerHTML = args.format;
-                this.buscarLibro(args.text);
+                // document.getElementById("formato").innerHTML = args.format;
+                app.buscarLibro(args.text);
+                document.getElementById("isbn").value = codigoIsbn;
                 // document.getElementById("texto").innerHTML = args.text;
                 // document.getElementById("formato").innerHTML = args.format;
                 // document.getElementById("cancelled").innerHTML = args.cancelled;
                 // document.getElementById("args").innerHTML = args;
-                $.mobile.changePage( pag, { transition: "slide"} );
+                $.mobile.changePage( 'newSolicitudPag', { transition: "slide"} );
                 console.log(args);
             });
         } catch (ex) {
