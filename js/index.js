@@ -156,7 +156,7 @@ var app = {
 
     queryDB: function(tx) {
         tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
-    }
+    },
 
     querySuccess: function(tx, results) {
         // debería estar vacio ya que se inserto nada
@@ -165,7 +165,7 @@ var app = {
         console.log("Filas afectadas = " + results.rowAffected);
         // El numero de filas retornadas
         console.log("Filas retornadas = " + results.rows.length);
-    }
+    },
 
     // Función 'callback' de error de transacción
     //
@@ -177,7 +177,6 @@ var app = {
     //
     successCB:  function() {
         alert("bien!");
-        log("bien");
     }
 
 };
