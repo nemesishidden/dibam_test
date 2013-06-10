@@ -18,6 +18,7 @@
  */
 var pictureSource;   // Origen de la imagen
 var destinationType; // Formato del valor retornado
+var db;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -32,7 +33,7 @@ var app = {
         document.getElementById('logear').addEventListener('click', this.logear, false);
         
         document.getElementById('scan').addEventListener('click', this.scan, false);
-
+        document.getElementById('guardarLibro').addEventListener('click', this.guardarLibro, false);
         document.getElementById('newSolicitud').addEventListener('click', this.cambioPagina, false);
     },
     // deviceready Event Handler
@@ -40,9 +41,12 @@ var app = {
     // The scope of `this` is the event. In order to call the `receivedEvent`
     // function, we must explicity call `app.receivedEvent(...);`
     onDeviceReady: function() {
-        pictureSource=navigator.camera.PictureSourceType;
-        destinationType=navigator.camera.DestinationType;
+        window.pictureSource=navigator.camera.PictureSourceType;
+        window.destinationType=navigator.camera.DestinationType;
+        window.db = window.openDatabase("solicitudesPorEnviar", "1.0", "Solicitudes por Enviar", 1000000);
         app.receivedEvent('deviceready');
+        window.db.transaction(app.populateDB, app.errorCB, app.successCB);
+        window.db.transaction(queryDB, errorCB);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -70,14 +74,13 @@ var app = {
                 */
                 //document.getElementById("texto").innerHTML = args.text;
                 document.getElementById("formato").innerHTML = args.format;
-                this.buscarLibro(args.format);
+                this.buscarLibro(args.text);
                 // document.getElementById("texto").innerHTML = args.text;
                 // document.getElementById("formato").innerHTML = args.format;
                 // document.getElementById("cancelled").innerHTML = args.cancelled;
                 // document.getElementById("args").innerHTML = args;
-
+                $.mobile.changePage( pag, { transition: "slide"} );
                 console.log(args);
-                this.cambioPagina
             });
         } catch (ex) {
             console.log(ex.message);
@@ -104,6 +107,7 @@ var app = {
         });
     },
     cambioPagina: function(){
+        app.buscarLibro(9789568410575)
         var pag = '#'+this.id+'Pag';
         $.mobile.changePage( pag, { transition: "slide"} );
         console.log('this.cambioPagina');
@@ -134,6 +138,45 @@ var app = {
                 
             }
         });
+    },
+
+    guardarLibro: function(){
+        console.log('guardarLibro');
+    },
+
+    // Rellena la base de datos 
+    //
+    populateDB: function(tx) {
+         tx.executeSql('DROP TABLE IF EXISTS DEMO');
+         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "Primera fila")');
+         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Segunda fila")');
+    },
+
+    queryDB: function(tx) {
+        tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+    }
+
+    querySuccess: function(tx, results) {
+        // debería estar vacio ya que se inserto nada
+        console.log("ID insert = " + results.insertId);
+        // Sera 0 debido que es una sentencia SQL de tipo 'select'
+        console.log("Filas afectadas = " + results.rowAffected);
+        // El numero de filas retornadas
+        console.log("Filas retornadas = " + results.rows.length);
+    }
+
+    // Función 'callback' de error de transacción
+    //
+    errorCB: function(tx, err) {
+        alert("Error procesando SQL: "+err);
+    },
+
+    // Función 'callback' de transacción satisfactoria
+    //
+    successCB:  function() {
+        alert("bien!");
+        log("bien");
     }
 
 };
