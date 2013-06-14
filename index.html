@@ -30,22 +30,23 @@
         <title>DIBAM</title>
     </head>
     <body>
-        <!--<div class="app">
-            <h1>Apache Cordova</h1>
+        <!-- <div class="app">
+            <h1>Apache Cordova</h1> -->
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
-            </div>-->
+            </div>
 
             <div data-role="page" id="login">
         <!--         <div data-role="header" data-position="fixed" data-fullscreen="true">
                     <h1>DIBAM</h1>
                 </div> -->
-                <div data-role="content">   
+                <div data-role="content">
+
                     <form action="" method="POST" lang="es">
-                        <label for="basic">Usuario:</label>
-                        <input type="text" name="username" id="username" value="" placeholder="Usuario"/>
-                        <label for="basic">Contraseña:</label>
+                        <label for="basic">Usuario:</label><br />
+                        <input type="text" name="username" id="username" value="" placeholder="Usuario"/><br /><br />
+                        <label for="basic">Contraseña:</label><br />
                         <input type="text" name="pass" id="pass" value="" placeholder="Contraseña"/>
                         <input type="button" value="Login" id="logear"/>
                         <!-- <div id="deviceready" class="blink">
@@ -77,7 +78,7 @@
                         <li><a href="#page5"><img src="img/icons/misPresupuestos.png"><p class="ui-li-desc-menu">Mis presupuestos</p></a></li>
                     </ul>       
                 </div>
-                <div data-role="footer" data-position="fixed">
+                <div data-role="footer" data-position="fixed" class="ui-bar-a-footer">
                     <div data-role="navbar" data-iconpos="top">
                         <ul>
                             <li><a href="#logout" data-icon="back">Salir</a></li>
@@ -125,7 +126,7 @@
                     </form>
                     
                 </div>
-                <div data-role="footer" data-id="foo1" data-position="fixed">
+                <div data-role="footer" data-id="foo1" data-position="fixed" class="ui-bar-a-footer">
                     <div data-role="navbar" data-iconpos="top">
                         <ul>
                             <li><a href="#inicio" data-icon="back">Volver</a></li>
@@ -141,7 +142,7 @@
                     <h1>Solicitud por enviar</h1>
                 </div>
                 <div data-role="content">   
-                    Content     
+                    <p id="logBDD"></p>    
                 </div>
                 <div data-role="footer" data-position="fixed">
                     <h4>Page Footer</h4>
@@ -165,7 +166,10 @@
                     <h1>Mis presupuestos</h1>
                 </div>
                 <div data-role="content">   
-                    Content     
+                    <ul data-role="listview" data-inset="true" id="listaPresupuestosUsuario">
+                        <li><a href="" id=""><p class="ui-li-desc-menu">Escanerar Libro</p></a></li>
+                        <li><a href="" id=""><p class="ui-li-desc-menu">Ingresar Manualmente</p></a></li>
+                    </ul>
                 </div>
                 <div data-role="footer" data-position="fixed">
                     <h4>Page Footer</h4>
@@ -178,9 +182,16 @@
             <p id="args"></p>
             </script>
         </div> -->
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="barcodescanner.js"></script>
-        <script type="text/javascript" src="childbrowser.js"></script>
+
+        <div data-role="dialog" id="dialogoError">
+            <p id="mensajeError"><p>
+        </div>
+
+<!--         // <script type="text/javascript" src="cordova.js"></script>
+        // <script type="text/javascript" src="js/BarcodeScanner/barcodescanner.js"></script>
+        // <script type="text/javascript" src="childbrowser.js"></script> -->
+        <script type="text/javascript" charset="utf-8" src="js/cordova-2.3.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/barcodescanner.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();

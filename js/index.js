@@ -45,8 +45,23 @@ var app = {
         window.destinationType=navigator.camera.DestinationType;
         window.db = window.openDatabase("solicitudesPorEnviar", "1.0", "Solicitudes por Enviar", 1000000);
         app.receivedEvent('deviceready');
-        window.db.transaction(app.populateDB, app.errorCB, app.successCB);
-        window.db.transaction(queryDB, errorCB);
+    },
+
+    baseDatos: function() {
+        
+        window.db = window.openDatabase("solicitudesPorEnviar", "1.0", "Solicitudes por Enviar", 1000000);
+        window.db.transaction(
+            function populateDB(tx) {
+                 tx.executeSql('DROP TABLE IF EXISTS DEMO');
+                 tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+                 tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+                 tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+            },function err(){
+                console.log('error')
+            },function successCB() {
+                alert("success!");
+            });
+        //window.db.transaction(queryDB, errorCB);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -91,31 +106,47 @@ var app = {
     logear: function(){
         console.log('logear');
         $.ajax({
-            url: 'data/usuario.json',
+            url: 'data/libro.json',
             type: 'GET',
             dataType: 'json',
             error : function (){ document.title='error'; }, 
             success: function (data) {
+                console.log("user: "+data.model.usuario);
+                console.log("pass: "+data.model.pass);
+                console.log("success: "+data.success);
                 if(data.success){
+                    app.obtenerPresupuestos();
                     var pag = '#inicio';
                     $.mobile.changePage( pag, { transition: "slide"} );
                 }
-                console.log(data.model.usuario);
-                console.log(data.model.pass);
-                console.log(data.success);
+
                 
             }
         });
     },
     cambioPagina: function(){
-        app.buscarLibro(9789568410575)
+        //app.buscarLibro(9789568410575)
         var pag = '#'+this.id+'Pag';
         $.mobile.changePage( pag, { transition: "slide"} );
         console.log('this.cambioPagina');
     },
 
-    capturarFoto: function(){
+    obtenerPresupuestos: function(){
 
+        $.ajax({
+            url: 'data/presupuestos.json',
+            type: 'POST',
+            dataType: 'json',
+            error : function (){ document.title='error'; }, 
+            success: function (data) {
+                if(data.success){
+                    data.model.forEach(function(a){
+                        console.log(a);
+                        document.getElementById("listaPresupuestos");
+                    });
+                }
+            }
+        });
     },
 
     buscarLibro: function(codigoIsbn){
@@ -126,17 +157,18 @@ var app = {
             error : function (){ document.title='error'; }, 
             success: function (data) {
                 if(data.success){
+                    data.model.forEach(function(a){
+                        if(a.isbn == codigoIsbn){
+                            document.getElementById("isbn").value = a.isbn;
+                            document.getElementById("titulo").value = a.titulo;
+                            document.getElementById("autor").value = a.autor;
+                            document.getElementById("precioReferencia").value = a.precioReferencia;
+                        }else{
 
-
-                    document.getElementById("isbn").value = codigoIsbn;
-                    document.getElementById("titulo").value = data.model.titulo;
-                    document.getElementById("autor").value = data.model.autor;
-                    document.getElementById("precioReferencia").value = data.model.precioReferencia;
+                        }
+                            //$( "#dialogoError" ).popup( "open" );
+                    });
                 }
-                console.log(data.model.usuario);
-                console.log(data.model.pass);
-                console.log(data.success);
-                
             }
         });
     },
@@ -162,11 +194,14 @@ var app = {
 
     querySuccess: function(tx, results) {
         // debería estar vacio ya que se inserto nada
+        log("ID insert = " + results.insertId);
         console.log("ID insert = " + results.insertId);
         // Sera 0 debido que es una sentencia SQL de tipo 'select'
         console.log("Filas afectadas = " + results.rowAffected);
         // El numero de filas retornadas
         console.log("Filas retornadas = " + results.rows.length);
+        document.getElementById("logBDD").innerHTML = "ID insert = " + results.insertId+"Filas afectadas = " + results.rowAffected+"Filas retornadas = " + results.rows.length;
+        alert("ID insert = " + results.insertId+"Filas afectadas = " + results.rowAffected+"Filas retornadas = " + results.rows.length);
     },
 
     // Función 'callback' de error de transacción
